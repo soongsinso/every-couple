@@ -1,0 +1,137 @@
+
+
+{% extends 'base.html' %}
+{%load static%}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board Index</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fef4f8; /* 전체 배경색 연핑크 */
+    }
+
+    .navbar {
+      background-color: #ffffff; /* 흰색 바탕 */
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar img {
+      height: 60px; /* 로고 이미지 크기 */
+      margin-right: 20px; /* 로고와 링크 간 간격 */
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 30px; /* 링크 간 간격 */
+      justify-content: center;
+      flex: 1; /* 플렉스 비율 설정 */
+      transform: translateX(-60px); /* 약간 왼쪽으로 이동 */
+    }
+
+    .navbar a {
+      color: #ff7b9c; /* 연핑크 색 버튼 텍스트 */
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .new-article {
+      display: block;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ff7b9c;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .new-article:hover {
+      text-decoration: underline;
+    }
+
+    .board-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .board-list li {
+      margin-bottom: 10px;
+      padding: 15px;
+      background: #fff;
+      border-radius: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .board-list li:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .board-list a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .board-list a:hover {
+      color: #ff7b9c;
+    }
+  </style>
+</head>
+<body>
+  <!-- 네비게이션 바 -->
+  <div class="navbar">
+    <img src="{%static '/image/logo.png'%}" alt="Logo"> <!-- 로고 이미지 -->
+    <div class="navbar-links">
+      <a href="{% url 'board_uni:index' %}">자대 게시판</a>
+      <a href="{% url 'board:index' %}">타대 게시판</a>
+      <a href="{% url 'chat:chatroom_list' %}">채팅</a>
+      <a href="{% url 'mypage:index' %}">마이페이지</a>
+    </div>
+  </div>
+
+  <!-- 메인 컨텐츠 -->
+  <div class="container">
+    <h1>자대 게시판</h1>
+    <a class="new-article" href="{% url 'board_uni:new' %}">글 작성하기</a>
+    <ul class="board-list">
+      {% for board in boards %}
+      <li>
+        <a href="{% url 'board_uni:detail' board.pk %}">{{ board.postname }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
+{% endblock %}

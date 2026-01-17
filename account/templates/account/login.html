@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fef4f8;
+    }
+    .login-container {
+      width: 350px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .login-container img {
+      display: block;
+      margin: 0 auto 40px;
+      width: 170px; /* 이미지 크기 */
+      height: auto;
+    }
+    .login-container form {
+      display: flex;
+      flex-direction: column;
+    }
+    .login-container form input {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .login-container form input[type="submit"] {
+      background-color: #ffb6c1;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .login-container form input[type="submit"]:hover {
+      background-color: #ff91aa;
+    }
+    .divider {
+      margin: 20px 0;
+      border-bottom: 1px solid #ddd;
+      position: relative;
+    }
+    .divider:before {
+      content: "or";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      padding: 0 10px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    .message {
+      color: red;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+    .register-link {
+      margin-top: 15px;
+      font-size: 0.8rem;
+      color: #ffb6c1;
+      text-decoration: none;
+    }
+    .register-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <img src="{% static 'image/logo.png' %}" alt="Logo">
+    {% if message %}
+    <p class="message">{{ message }}</p>
+    {% endif %}
+    <form action="{% url 'account:login' %}" method="POST">
+      {% csrf_token %}
+      <input type="text" name="id" placeholder="ID">
+      <input type="password" name="password" placeholder="Password">
+      <input type="submit" value="로그인">
+    </form>
+    <a class="register-link" href="{% url 'account:register' %}">회원가입</a>
+  </div>
+</body>
+</html>

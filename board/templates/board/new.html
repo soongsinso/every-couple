@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board New</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .new-container {
+            width: 500px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .new-container h1 {
+            font-size: 2rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .new-container form label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .new-container form input[type="text"],
+        .new-container form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .new-container form textarea {
+            resize: none; /* 크기 조절 비활성화 */
+        }
+
+        .new-container form input[type="submit"] {
+            width: 100%;
+            background: #ff7b9c;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .new-container form input[type="submit"]:hover {
+            background: #ff4b73;
+        }
+    </style>
+</head>
+<body>
+    <div class="new-container">
+        <h1>게시글 작성</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="title">제목</label>
+            <input id="title" type="text" name="title" placeholder="제목을 입력하세요" required>
+
+            <label for="content">내용</label>
+            <textarea id="content" name="content" rows="10" placeholder="내용을 입력하세요" required></textarea>
+
+            <input type="submit" value="작성하기">
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Detail</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .detail-container {
+            width: 600px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .detail-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .detail-metadata {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .detail-metadata .author {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .detail-content {
+            font-size: 1.2rem;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .buttons a, .buttons form input {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            background: #ff7b9c;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .buttons a:hover, .buttons form input:hover {
+            background: #ff4b73;
+        }
+
+        .buttons form {
+            margin: 0;
+        }
+
+        .chat-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #ff7b9c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .chat-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="detail-container">
+        <div class="detail-title">
+            {{ board.postname }}
+        </div>
+        <div class="detail-metadata">
+            <div class="author">작성자: {{ users }}</div>
+            <div class="time">
+                작성 시각: {{ board.createdate }}<br>
+                수정 시각: {{ board.updatedate }}
+            </div>
+        </div>
+        <div class="detail-content">
+            {{ board.content }}
+        </div>
+        <div class="buttons">
+            <a href="{% url 'board:index' %}">목록으로</a>
+            <a href="{% url 'board:edit' board.pk %}">수정</a>
+            <form action="{% url 'board:delete' board.pk %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="삭제">
+            </form>
+        </div>
+        <a href="{% url 'chat:create_chatroom' other_user_id %}" class="chat-link">
+            작성자와 채팅하기
+        </a>
+    </div>
+</body>
+</html>
+{% endblock %}

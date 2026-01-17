@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채팅방 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fef4f8; /* 핑크 배경 */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 150px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            font-size: 25px;
+            color: #ff91aa; /* 강조 핑크색 */
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #ffe5ec;
+            border-radius: 8px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        li:hover {
+            background: #ffbdd3;
+            transform: translateY(-3px);
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #ff6f91;
+        }
+        p {
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>참여 중인 채팅방</h1>
+        {% if chatrooms %}
+        <ul>
+            {% for chatroom in chatrooms %}
+                <li>
+                    {% if chatroom.user1.username != request.user.username %}
+                        <a href="{% url 'chat:chatroom_detail' chatroom.chatroom_id %}">
+                            {{ chatroom.user1.name}}
+                        </a>
+                    {% else %}
+                        <a href="{% url 'chat:chatroom_detail' chatroom.chatroom_id %}">
+                            {{ chatroom.user2.name}}
+                        </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        
+        {% else %}
+            <p>참여 중인 채팅방이 없습니다.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

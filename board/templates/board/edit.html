@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Edit</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .edit-container {
+            width: 500px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-container h1 {
+            font-size: 2rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .edit-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edit-container label {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .edit-container input[type="text"],
+        .edit-container textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .edit-container input[type="text"]:focus,
+        .edit-container textarea:focus {
+            outline: none;
+            border-color: #ff7b9c;
+            box-shadow: 0 0 5px rgba(255, 123, 156, 0.5);
+        }
+
+        .edit-container input[type="submit"] {
+            background-color: #ff7b9c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .edit-container input[type="submit"]:hover {
+            background-color: #ff4b73;
+        }
+    </style>
+</head>
+<body>
+    <div class="edit-container">
+        <h1>게시글 수정</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="title">제목</label>
+            <input id="title" type="text" name="title" value="{{ board.title }}" required>
+            <label for="content">내용</label>
+            <textarea name="content" id="content" cols="30" rows="10" required>{{ board.content }}</textarea>
+            <input type="submit" value="수정하기">
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

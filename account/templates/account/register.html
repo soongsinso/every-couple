@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fef4f8;
+    }
+    .register-container {
+      width: 400px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .register-container h1 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: #333;
+    }
+    .register-container form {
+      display: flex;
+      flex-direction: column;
+    }
+    .register-container form input,
+    .register-container form select {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .register-container form input[type="submit"] {
+      background-color: #ffb6c1;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .register-container form input[type="submit"]:hover {
+      background-color: #ff91aa;
+    }
+    .message {
+      color: red;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+    .return-link {
+      margin-top: 15px;
+      font-size: 0.8rem;
+      color: #ffb6c1;
+      text-decoration: none;
+    }
+    .return-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h1>회원가입</h1>
+    {% if message %}
+    <p class="message">{{ message }}</p>
+    {% endif %}
+    <form action="{% url 'account:register' %}" method="POST">
+      {% csrf_token %}
+      <input type="text" name="id" placeholder="ID" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <input type="number" name="age" placeholder="나이" min="1" max="150" required>
+      <input type="text" name="name" placeholder="이름" required>
+      <input type="text" name="university" placeholder="대학교" required>
+      <input type="text" name="major" placeholder="학과" required>
+      <select name="studentnumber" required>
+        <option value="" disabled selected>입학연도(학번)</option>
+        <option value="2010">2010</option>
+        <option value="2011">2011</option>
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+      </select>
+      <input type="submit" value="회원가입">
+    </form>
+    <a class="return-link" href="{% url 'account:login' %}">로그인하러 가기</a>
+  </div>
+</body>
+</html>
+

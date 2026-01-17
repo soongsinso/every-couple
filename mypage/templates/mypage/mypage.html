@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    <style>
+        /* 구글 폰트 추가 */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Nanum+Gothic:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nanum Gothic', sans-serif; /* 한국어 글씨체 */
+            background-color: #fef4f8; /* 단일 배경색 */
+        }
+
+        .mypage-container {
+            width: 400px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .mypage-container h1 {
+            font-family: 'Roboto', sans-serif; /* 깔끔한 영어 글씨체 */
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .mypage-container .info {
+            text-align: left;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .mypage-container .info p {
+            font-size: 1rem;
+            color: #555;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .mypage-container .info p span {
+            font-weight: bold;
+            color: #ff7b9c;
+        }
+    </style>
+</head>
+<body>
+    <div class="mypage-container">
+        <h1>내 정보</h1>
+        <div class="info">
+            <p>이름: <span>{{ user.name }}</span></p>
+            <p>나이: <span>{{ user.age }}</span></p>
+            <p>대학교: <span>{{ user.university }}</span></p>
+            <p>학과: <span>{{ user.major }}</span></p>
+            <p>학번: <span>{{ user.studentnumber }}</span></p>
+        </div>
+    </div>
+</body>
+</html>
